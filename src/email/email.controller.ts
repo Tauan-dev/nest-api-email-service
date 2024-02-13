@@ -13,7 +13,6 @@ export class EmailController {
 
   @Post()
   create(@Body() createEmailDTO: CreateEmailDTO) {
-    // Corrija o nome do parâmetro
-    return this.emailService.create(createEmailDTO); // Use o parâmetro correto
+    return this.emailService.create(createEmailDTO);
   }
 }

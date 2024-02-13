@@ -5,6 +5,12 @@ export class CreateEmailDTO {
   readonly email: string;
 
   @IsString()
+  readonly sender: string;
+
+  @IsString()
+  readonly subject: string;
+
+  @IsString()
   readonly description: string;
 
   @IsString()

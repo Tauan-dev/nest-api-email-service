@@ -17,6 +17,9 @@ export class Email {
   emailToSend: string;
 
   @Column()
+  subject: string;
+
+  @Column()
   description: string;
 
   @CreateDateColumn({
