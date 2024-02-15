@@ -5,10 +5,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('email')
+@Entity('emails')
 export class Email {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column()
   sender: string;

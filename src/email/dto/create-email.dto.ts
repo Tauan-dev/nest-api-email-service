@@ -1,8 +1,8 @@
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateEmailDTO {
-  @IsString()
-  readonly email: string;
+  @IsNumber()
+  readonly id: number;
 
   @IsString()
   readonly sender: string;

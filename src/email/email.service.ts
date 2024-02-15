@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateEmailDTO } from './dto/create-email.dto';
 import { Repository } from 'typeorm';
 import * as nodemailer from 'nodemailer';
-import { EmailController } from './email.controller';
 
 @Injectable()
 export class EmailService {
@@ -13,32 +12,27 @@ export class EmailService {
     private readonly emailRepository: Repository<Email>,
   ) {}
 
-  // METHODS CRUDING
+  // Métodos CRUD
 
-  async findAll() {
-    return await this.emailRepository.find();
-  }
-
-  async create(createEmail: CreateEmailDTO) {
-    const email = this.emailRepository.create({
-      ...createEmail,
-    });
+  async create(CreateEmailDTO: CreateEmailDTO) {
+    const email = this.emailRepository.create(CreateEmailDTO);
 
     return this.emailRepository.save(email);
   }
 
   async sendEmail(
+    id: number,
     sender: string,
     emailToSend: string,
-    description: string,
     subject: string,
+    description: string,
   ) {
-    // configurações do email que vai enviar para os outros
-    const transporter = nodemailer.createTransporter({
+    // Configurações do serviço de email
+    const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'bootemailsender@gmail.com',
-        pass: 'tauan198',
+        user: 'tauanspider@gmail.com',
+        pass: 'eyqc pxge fjdv rehn',
       },
     });
 
@@ -49,6 +43,17 @@ export class EmailService {
       text: description,
     };
 
-    await transporter.sendMail(mailOptions); // vai receber um objeto contendo as
+    await transporter.sendMail(mailOptions);
+
+    // Criar um novo registro de email no banco de dados
+    const email = await this.create({
+      id: id, // ou qualquer outra forma de gerar o ID
+      sender,
+      emailToSend,
+      subject,
+      description,
+    });
+
+    return email;
   }
 }

@@ -8,10 +8,10 @@ export class CreateEmailTable1707853464217 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'varchar',
-            length: '36',
+            type: 'int',
             isPrimary: true,
-            generationStrategy: 'uuid',
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'sender',
